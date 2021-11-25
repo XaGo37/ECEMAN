@@ -1,5 +1,7 @@
 package ECEMAN;
 
+import java.util.Scanner;
+
 public class Level {
 
     //Pour reset créer une map reset
@@ -27,27 +29,68 @@ public class Level {
 
     public void movePerso(char direction) {
 
+        int tempPosX = perso.getxPerso();
+        int tempPosY = perso.getyPerso();
+        char tempCurrentCase = perso.getCurrentCase();
+        boolean playerMoved = false;
+
+
         switch (direction) {
             case 'z':
-                if (testBlock(perso.getxPerso()-1, perso.getyPerso()))
+                if (testBlock(perso.getxPerso() - 1, perso.getyPerso())) {
+                    perso.setCurrentCase(map.getLayer(0).getCase(tempPosX - 1, tempPosY));
                     perso.setyPerso(perso.getxPerso() - 1);
+                    map.getLayer(0).setCase(perso.getxPerso(), perso.getyPerso(), 'P');
+                    playerMoved = true;
+                }
                 break;
             case 's':
-                if (testBlock(perso.getxPerso()+1, perso.getyPerso()))
+                if (testBlock(perso.getxPerso() + 1, perso.getyPerso())) {
+                    perso.setCurrentCase(map.getLayer(0).getCase(tempPosX + 11, tempPosY));
                     perso.setyPerso(perso.getxPerso() + 1);
+                    map.getLayer(0).setCase(perso.getxPerso(), perso.getyPerso(), 'P');
+                    playerMoved = true;
+                }
                 break;
             case 'q':
-                if (testBlock(perso.getxPerso(), perso.getyPerso()-1))
+                if (testBlock(perso.getxPerso(), perso.getyPerso() - 1)) {
+                    perso.setCurrentCase(map.getLayer(0).getCase(tempPosX, tempPosY - 1));
                     perso.setyPerso(perso.getyPerso() - 1);
+                    map.getLayer(0).setCase(perso.getxPerso(), perso.getyPerso(), 'P');
+                    playerMoved = true;
+                }
                 break;
             case 'd':
-                if (testBlock(perso.getxPerso(), perso.getyPerso()+1)) {
+                if (testBlock(perso.getxPerso(), perso.getyPerso() + 1)) {
+                    perso.setCurrentCase(map.getLayer(0).getCase(tempPosX, tempPosY + 1));
                     perso.setyPerso(perso.getyPerso() + 1);
-                    System.out.println("je suis passé");
+                    map.getLayer(0).setCase(perso.getxPerso(), perso.getyPerso(), 'P');
+                    playerMoved = true;
                 }
                 break;
         }
+
+        if(playerMoved == true){
+            changeCase(tempCurrentCase,tempPosX,tempPosY);
+        }
+
         Affichage.afficher(map,perso);
+    }
+
+
+    private void changeCase(char currentCase, int x, int y){
+        switch(currentCase){
+            case 'o' :
+                map.getLayer(0).setCase(x,y,' ');
+                break;
+            case 'X' :
+                map.getLayer(0).setCase(x,y,'o');
+                break;
+            default :
+                map.getLayer(0).setCase(x,y,currentCase);
+                break;
+
+        }
     }
 
     private boolean testBlock(int x, int y) {

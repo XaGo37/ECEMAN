@@ -1,6 +1,7 @@
 package ECEMAN;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class Main {
@@ -18,19 +19,44 @@ public class Main {
                 {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
                 {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'}};
 
+        char [][] layer2 ={{'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+                {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+                {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+                {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+                {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+                {'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M'},
+                {'M', 'P', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'o', 'o', 'E', 'M'},
+                {'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M'},
+                {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+                {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'}};
+
+
+
+        //LEVEL1
         ArrayList<Layer> layerlvl1 = new ArrayList<>();
         layerlvl1.add(new Layer(layer1));
-        Perso player = new Perso(0,0);
+        Perso playerlvl1 = new Perso(0,0);
         Map map = new Map(layerlvl1);
-        Level lvl1 = new Level(map, player);
+        Level lvl1 = new Level(map, playerlvl1);
 
-        lvl1.movePerso('d');
-        lvl1.movePerso('d');
-        lvl1.movePerso('d');
-        lvl1.movePerso('d');
-        lvl1.movePerso('z');
-        lvl1.movePerso('q');
+        //LEVEL2
+        ArrayList<Layer> layerlvl2 = new ArrayList<>();
+        layerlvl2.add(new Layer(layer2));
+        Perso playerlvl2 = new Perso(0,0);
+        Map map2 = new Map(layerlvl2);
+        Level lvl2 = new Level(map2,playerlvl2);
 
+
+        while(playerlvl2.getCurrentCase() != 'E' && playerlvl2.getCurrentCase() != ' ' ) {
+
+            Scanner position = new Scanner(System.in);
+            System.out.println("Enter choice :");
+            char choice = position.next().charAt(0);
+
+            lvl2.movePerso(choice);
+        }
+
+        System.out.println("Vous avez gagné");
 
 
     }

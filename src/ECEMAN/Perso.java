@@ -5,6 +5,8 @@ public class Perso {
     private int xPerso;
     private int yPerso;
 
+    private char currentCase = 'o';
+
     public Perso(int x, int y){
         xPerso = x;
         yPerso = y;
@@ -33,5 +35,14 @@ public class Perso {
     public void setCoords(int x,int y){
         xPerso = x;
         yPerso = y;
+    }
+
+
+    public char getCurrentCase() {
+        return currentCase;
+    }
+
+    public void setCurrentCase(char currentCase) {
+        this.currentCase = currentCase;
     }
 }

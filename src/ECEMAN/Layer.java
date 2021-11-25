@@ -24,5 +24,9 @@ public class Layer { //Tableau 1
     public int getSizeY(){
         return layer.length;
     }
+    public void setCase(int x, int y, char carCase){
+        layer[x][y] = carCase;
+    }
+
     //Set Layer case
 }
