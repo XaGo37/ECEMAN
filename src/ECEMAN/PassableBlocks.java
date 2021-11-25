@@ -1,7 +1,7 @@
 package ECEMAN;
 
 public enum PassableBlocks {
-    o('o'),X('X'),E('E'),SPACE(' ');
+    o('o'),X('X'),E('E'),SPACE(' '),T('T'), t('t');
 
     public char asChar() {
         return asChar;

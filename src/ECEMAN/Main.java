@@ -31,6 +31,18 @@ public class Main {
                 {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'}};
 
 
+        char [][] layer4 = {{'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+                {'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M'},
+                {'M', 'T', 'o', 'o', 'o', 'o', 'o', 'E', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'M'},
+                {'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M'},
+                {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+                {'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M'},
+                {'M', 'P', 'o', 'T', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'X', 'o', 'M'},
+                {'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M'},
+                {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+                {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'}};
+
+
 
         //LEVEL1
         ArrayList<Layer> layerlvl1 = new ArrayList<>();
@@ -46,14 +58,21 @@ public class Main {
         Map map2 = new Map(layerlvl2);
         Level lvl2 = new Level(map2,playerlvl2);
 
+        //LEVEL4
+        ArrayList<Layer> layerlvl4 = new ArrayList<>();
+        layerlvl4.add(new Layer(layer4));
+        Perso playerlvl4 = new Perso(0,0);
+        Map map4 = new Map(layerlvl4);
+        Level lvl4 = new Level(map4,playerlvl4);
 
-        while(playerlvl2.getCurrentCase() != 'E' && playerlvl2.getCurrentCase() != ' ' ) {
+
+        while(playerlvl4.getCurrentCase() != 'E' && playerlvl4.getCurrentCase() != ' ' ) {
 
             Scanner position = new Scanner(System.in);
             System.out.println("Enter choice :");
             char choice = position.next().charAt(0);
 
-            lvl2.movePerso(choice);
+            lvl4.movePerso(choice);
         }
 
         System.out.println("Vous avez gagné");

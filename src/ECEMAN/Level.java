@@ -69,12 +69,16 @@ public class Level {
                 }
                 break;
         }
+        if(playerMoved == true && perso.getCurrentCase() == 'T'){
+            teleportPerso(perso.getxPerso(), perso.getyPerso());
 
+        }
         if(playerMoved == true){
             changeCase(tempCurrentCase,tempPosX,tempPosY);
         }
 
         Affichage.afficher(map,perso);
+
     }
 
 
@@ -86,10 +90,28 @@ public class Level {
             case 'X' :
                 map.getLayer(0).setCase(x,y,'o');
                 break;
+            case 'T' :
+                map.getLayer(0).setCase(x,y,'t');
+                break;
             default :
                 map.getLayer(0).setCase(x,y,currentCase);
                 break;
 
+        }
+    }
+
+    public void teleportPerso(int x, int y) {
+        int tempPosX = perso.getxPerso();
+        int tempPosY = perso.getyPerso();
+        changeCase('T', tempPosX,tempPosY);
+        for (int i = 0; i < map.getLayer(0).getSizeY(); i++) {
+            for (int j = 0; j < map.getLayer(0).getSizeX(); j++) {
+                if (map.getLayer(0).getCase(i, j) == 'T' && !(i == x && j==y)) {
+                    perso.setCoords(i, j);
+                    map.getLayer(0).setCase(perso.getxPerso(), perso.getyPerso(), 'P');
+
+                }
+            }
         }
     }
 
