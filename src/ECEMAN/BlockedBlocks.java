@@ -2,7 +2,7 @@ package ECEMAN;
 
 
 public enum BlockedBlocks {
-    M('M'),X('X');
+    M('M'),X('X'),W('W');
 
     public char asChar() {
         return asChar;

@@ -39,15 +39,15 @@ public class Level {
             case 'z':
                 if (testBlock(perso.getxPerso() - 1, perso.getyPerso())) {
                     perso.setCurrentCase(map.getLayer(0).getCase(tempPosX - 1, tempPosY));
-                    perso.setyPerso(perso.getxPerso() - 1);
+                    perso.setxPerso(perso.getxPerso() - 1);
                     map.getLayer(0).setCase(perso.getxPerso(), perso.getyPerso(), 'P');
                     playerMoved = true;
                 }
                 break;
             case 's':
                 if (testBlock(perso.getxPerso() + 1, perso.getyPerso())) {
-                    perso.setCurrentCase(map.getLayer(0).getCase(tempPosX + 11, tempPosY));
-                    perso.setyPerso(perso.getxPerso() + 1);
+                    perso.setCurrentCase(map.getLayer(0).getCase(tempPosX + 1, tempPosY));
+                    perso.setxPerso(perso.getxPerso() + 1);
                     map.getLayer(0).setCase(perso.getxPerso(), perso.getyPerso(), 'P');
                     playerMoved = true;
                 }
@@ -83,6 +83,10 @@ public class Level {
 
 
     private void changeCase(char currentCase, int x, int y){
+        if(perso.isIslight()==true){
+            map.getLayer(0).setCase(x,y,currentCase);
+            return;
+        }
         switch(currentCase){
             case 'o' :
                 map.getLayer(0).setCase(x,y,' ');
@@ -93,14 +97,17 @@ public class Level {
             case 'T' :
                 map.getLayer(0).setCase(x,y,'t');
                 break;
+            case 'L' :
+                map.getLayer(0).setCase(x,y,'o');
+                perso.setIslight(true);
+                break;
             default :
                 map.getLayer(0).setCase(x,y,currentCase);
                 break;
-
         }
     }
 
-    public void teleportPerso(int x, int y) {
+    private void teleportPerso(int x, int y) {
         int tempPosX = perso.getxPerso();
         int tempPosY = perso.getyPerso();
         changeCase('T', tempPosX,tempPosY);
@@ -114,11 +121,13 @@ public class Level {
             }
         }
     }
+    private void Mower(){
+
+    }
 
     private boolean testBlock(int x, int y) {
         for (PassableBlocks passBlock : PassableBlocks.values()) {
             System.out.println(map.getLayer(0).getCase(x, y));
-            //Creer boucle for pour chaque Layer getLayer(i) , taille layer
             if (map.getLayer(0).getCase(x, y) == passBlock.asChar()) {
                 return true;
             }

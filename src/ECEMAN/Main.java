@@ -31,6 +31,17 @@ public class Main {
                 {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'}};
 
 
+        char [][] layer3 = {{'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+                {'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M'},
+                {'M', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'E', 'o', 'M'},
+                {'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'o', 'o', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M'},
+                {'#', '#', '#', '#', '#', '#', '#', '#', 'M', 'o', 'o', 'M', '#', '#', '#', '#', '#', '#', '#'},
+                {'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'o', 'o', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M'},
+                {'M', 'P', 'o', 'o', 'o', 'o', 'o', 'o', 'L', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'M'},
+                {'M', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'M'},
+                {'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M'},
+                {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'}};
+
         char [][] layer4 = {{'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
                 {'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M'},
                 {'M', 'T', 'o', 'o', 'o', 'o', 'o', 'E', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'M'},
@@ -58,6 +69,14 @@ public class Main {
         Map map2 = new Map(layerlvl2);
         Level lvl2 = new Level(map2,playerlvl2);
 
+        //LEVEL2
+        ArrayList<Layer> layerlvl3 = new ArrayList<>();
+        layerlvl3.add(new Layer(layer3));
+        Perso playerlvl3 = new Perso(0,0);
+        Map map3 = new Map(layerlvl3);
+        Level lvl3 = new Level(map3,playerlvl3);
+
+
         //LEVEL4
         ArrayList<Layer> layerlvl4 = new ArrayList<>();
         layerlvl4.add(new Layer(layer4));
@@ -66,13 +85,13 @@ public class Main {
         Level lvl4 = new Level(map4,playerlvl4);
 
 
-        while(playerlvl4.getCurrentCase() != 'E' && playerlvl4.getCurrentCase() != ' ' ) {
+        while(playerlvl3.getCurrentCase() != 'E' && playerlvl3.getCurrentCase() != ' ' ) {
 
             Scanner position = new Scanner(System.in);
             System.out.println("Enter choice :");
             char choice = position.next().charAt(0);
 
-            lvl4.movePerso(choice);
+            lvl3.movePerso(choice);
         }
 
         System.out.println("Vous avez gagné");
