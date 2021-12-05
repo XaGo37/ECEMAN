@@ -1,13 +1,13 @@
 package ECEMAN;
 
-import java.util.Scanner;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class Level {
-
-    //Pour reset créer une map reset
+public class Level  {
 
     private Map map;
     private Perso perso;
+    private Enemy enemy;
     private boolean isDone = false;
     private boolean isOver = false;
 
@@ -15,12 +15,9 @@ public class Level {
         this.map = map;
         this.perso = perso;
 
-        System.out.print(map.getLayer(0).getSizeX());
-        System.out.print(map.getLayer(0).getSizeY());
-
-        for (int i = 0; i < map.getLayer(0).getSizeY(); i++) {
-            for (int j = 0; j <  map.getLayer(0).getSizeX(); j++) {
-                if(map.getLayer(0).getCase(i,j) == 'P'){
+        for (int i = 0; i < map.getSizeY(); i++) {
+            for (int j = 0; j <  map.getSizeX(); j++) {
+                if(map.getCase(i,j) == 'P'){
                     perso.setCoords(i,j);
                 }
             }
@@ -34,75 +31,69 @@ public class Level {
         char tempCurrentCase = perso.getCurrentCase();
         boolean playerMoved = false;
 
-
         switch (direction) {
             case 'z':
                 if (testBlock(perso.getxPerso() - 1, perso.getyPerso())) {
-                    perso.setCurrentCase(map.getLayer(0).getCase(tempPosX - 1, tempPosY));
+                    perso.setCurrentCase(map.getCase(tempPosX - 1, tempPosY));
                     perso.setxPerso(perso.getxPerso() - 1);
-                    map.getLayer(0).setCase(perso.getxPerso(), perso.getyPerso(), 'P');
+                    map.setCase(perso.getxPerso(), perso.getyPerso(), 'P');
                     playerMoved = true;
                 }
                 break;
             case 's':
                 if (testBlock(perso.getxPerso() + 1, perso.getyPerso())) {
-                    perso.setCurrentCase(map.getLayer(0).getCase(tempPosX + 1, tempPosY));
+                    perso.setCurrentCase(map.getCase(tempPosX + 1, tempPosY));
                     perso.setxPerso(perso.getxPerso() + 1);
-                    map.getLayer(0).setCase(perso.getxPerso(), perso.getyPerso(), 'P');
+                    map.setCase(perso.getxPerso(), perso.getyPerso(), 'P');
                     playerMoved = true;
                 }
                 break;
             case 'q':
                 if (testBlock(perso.getxPerso(), perso.getyPerso() - 1)) {
-                    perso.setCurrentCase(map.getLayer(0).getCase(tempPosX, tempPosY - 1));
+                    perso.setCurrentCase(map.getCase(tempPosX, tempPosY - 1));
                     perso.setyPerso(perso.getyPerso() - 1);
-                    map.getLayer(0).setCase(perso.getxPerso(), perso.getyPerso(), 'P');
+                    map.setCase(perso.getxPerso(), perso.getyPerso(), 'P');
                     playerMoved = true;
                 }
                 break;
             case 'd':
                 if (testBlock(perso.getxPerso(), perso.getyPerso() + 1)) {
-                    perso.setCurrentCase(map.getLayer(0).getCase(tempPosX, tempPosY + 1));
+                    perso.setCurrentCase(map.getCase(tempPosX, tempPosY + 1));
                     perso.setyPerso(perso.getyPerso() + 1);
-                    map.getLayer(0).setCase(perso.getxPerso(), perso.getyPerso(), 'P');
+                    map.setCase(perso.getxPerso(), perso.getyPerso(), 'P');
                     playerMoved = true;
                 }
-                break;
         }
         if(playerMoved == true && perso.getCurrentCase() == 'T'){
             teleportPerso(perso.getxPerso(), perso.getyPerso());
-
         }
         if(playerMoved == true){
             changeCase(tempCurrentCase,tempPosX,tempPosY);
         }
-
         Affichage.afficher(map,perso);
-
     }
-
 
     private void changeCase(char currentCase, int x, int y){
         if(perso.isIslight()==true){
-            map.getLayer(0).setCase(x,y,currentCase);
+            map.setCase(x,y,currentCase);
             return;
         }
         switch(currentCase){
             case 'o' :
-                map.getLayer(0).setCase(x,y,' ');
+                map.setCase(x,y,' ');
                 break;
             case 'X' :
-                map.getLayer(0).setCase(x,y,'o');
+                map.setCase(x,y,'o');
                 break;
             case 'T' :
-                map.getLayer(0).setCase(x,y,'t');
+                map.setCase(x,y,'t');
                 break;
             case 'L' :
-                map.getLayer(0).setCase(x,y,'o');
+                map.setCase(x,y,'o');
                 perso.setIslight(true);
                 break;
             default :
-                map.getLayer(0).setCase(x,y,currentCase);
+                map.setCase(x,y,currentCase);
                 break;
         }
     }
@@ -111,24 +102,20 @@ public class Level {
         int tempPosX = perso.getxPerso();
         int tempPosY = perso.getyPerso();
         changeCase('T', tempPosX,tempPosY);
-        for (int i = 0; i < map.getLayer(0).getSizeY(); i++) {
-            for (int j = 0; j < map.getLayer(0).getSizeX(); j++) {
-                if (map.getLayer(0).getCase(i, j) == 'T' && !(i == x && j==y)) {
+        for (int i = 0; i < map.getSizeY(); i++) {
+            for (int j = 0; j < map.getSizeX(); j++) {
+                if (map.getCase(i, j) == 'T' && !(i == x && j==y)) {
                     perso.setCoords(i, j);
-                    map.getLayer(0).setCase(perso.getxPerso(), perso.getyPerso(), 'P');
-
+                    map.setCase(perso.getxPerso(), perso.getyPerso(), 'P');
                 }
             }
         }
     }
-    private void Mower(){
-
-    }
 
     private boolean testBlock(int x, int y) {
         for (PassableBlocks passBlock : PassableBlocks.values()) {
-            System.out.println(map.getLayer(0).getCase(x, y));
-            if (map.getLayer(0).getCase(x, y) == passBlock.asChar()) {
+            System.out.println(map.getCase(x, y));
+            if (map.getCase(x, y) == passBlock.asChar()) {
                 return true;
             }
         }

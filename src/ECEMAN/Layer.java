@@ -19,7 +19,7 @@ public class Layer { //Tableau 1
         return layer[x][y];
     }
     public int getSizeX(){
-        return layer[0].length;
+        return layer[1].length;
     }
     public int getSizeY(){
         return layer.length;
