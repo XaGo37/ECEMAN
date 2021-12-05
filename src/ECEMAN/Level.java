@@ -92,6 +92,8 @@ public class Level  {
                 map.setCase(x,y,'o');
                 perso.setIslight(true);
                 break;
+            case 'Z':
+                break;
             default :
                 map.setCase(x,y,currentCase);
                 break;
