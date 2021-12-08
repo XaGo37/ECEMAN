@@ -7,6 +7,7 @@ public class Perso {
 
     private char currentCase = 'o';
     private boolean islight = false;
+    private int life = 3;
 
     public Perso(int x, int y){
         xPerso = x;
@@ -53,5 +54,14 @@ public class Perso {
 
     public void setIslight(boolean islight) {
         this.islight = islight;
+    }
+
+
+    public int getLife() {
+        return life;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
     }
 }
